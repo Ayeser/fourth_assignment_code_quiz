@@ -1,7 +1,11 @@
-#disappear {
-    opacity: .01;
+#highScores {
+    float: left;
 }
 
-#restOfGame {
-    opacity: .01;
+#timerHolder {
+    float: right;
+}
+
+#clickToStart {
+    margin: auto;
 }
