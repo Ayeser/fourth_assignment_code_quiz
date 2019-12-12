@@ -17,7 +17,7 @@ var questions = [
     {
       title: "Does (77 === '77') return as true?",
       choices: ["depends", "of course", "nope", "will return null"],
-      answer: "of course"
+      answer: "nope"
     },
     {
       title: "Does (77 == '77') return as true?",

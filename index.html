@@ -11,14 +11,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- Added a link to Bootstrap-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="Style/style.css">
 </head>
 
 <body>
     <div class="row">
         <div class="col-sm-8" id="highScores"><button type="button" class="btn btn-secondary"
                 onclick="showHighScores()">High Scores</button></div>
-        <div class="col-sm-4" id="timerHolder"></div>
+        <div class="col-sm-4" id="timerHolder">Time left: 0</div>
     </div>
     <div class="row">
         <button id="clickToStart">Click me to start the quiz</button>
@@ -29,7 +29,7 @@
         <form class="row">
             <h1 class="col-sm-12">Quiz Questions</h1>
             <p class="question col-sm-12"></p>
-            <div id="quizChoices" class="col-sm-12">
+            <div id="quizChoices" class="col-sm-1">
                 <button id="0" type="button" class="btn btn-primary" onclick="checkQuestion(zero)"></button>
                 <button id="1" type="button" class="btn btn-primary" onclick="checkQuestion(one)"></button>
                 <button id="2" type="button" class="btn btn-primary" onclick="checkQuestion(two)"></button>
@@ -42,8 +42,8 @@
 
     <div id="localStorageScores"></div>
 
-    <script src="script.js"></script>
-    <script src="questions.js"></script>
+    <script src="Script/script.js"></script>
+    <script src="Script/questions.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </body>
 
