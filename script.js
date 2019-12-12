@@ -1,84 +1,85 @@
-//Instead of below method, create a function that creates a div and then erases a div (button) for game start. 
-
-// Use this below to make initial start mode and gameplay mode
-// in css put .start .game or whatever to define the modes
-
-//use assignment 18 to make each answer a clickable event. and if the clicked equals the answer key in the object, voila. if answer === choices[id]
-// add if statement so when reaches end it finishes game
-// listEl.addEventListener("click", function(event) {
-//         event.preventDefault();
-//         if(event.target.matches("button")) {
-//           const item = document.createElement("div");
-//           item.textContent = groceries[event.target.parentElement.id];
-//           shoppingCartEl.append(item);
-//         }
-//       });
+// This counter is to advance through the quiz questions properly
+var counter = 0;
+// These values help the clicked answer buttons score properly
+const zero = 0;
+const one = 1;
+const two = 2;
+const three = 3;
+let finalScore = 0;
+let secondsLeft = 100;
 
 $(document).ready(function () {
 
-var i = 0;
+        //Click the start button to show the first question of the quiz
+        $("#quiz").hide();
+        $("inputInitials").hide();
+        $("#clickToStart").on('click', function () {
+                $("#clickToStart").hide("slow");
+                $("#quiz").show("slow");
+                setTime();
+                showQuestion(counter);
+        });
+});
 
-function showQuestion() {
-        console.log("Questions length is " + questions.length)
-        if (i = questions.length) {
-                endOfGame();
-        } else {
-        $("#quiz").append("<h2>" + questions[i].title + "</h2>");
-        $("#quiz").append('<div id="a">' + '<button type="button" class="btn btn-primary">' + questions[i].choices[0] + '</button>' + '</div>');
-        $("#quiz").append('<div id="b">' + '<button type="button" class="btn btn-primary">' + questions[i].choices[1] + '</button>' + '</div>');
-        $("#quiz").append('<div id="c">' + '<button type="button" class="btn btn-primary">' + questions[i].choices[2] + '</button>' + '</div>');
-        $("#quiz").append('<div id="d">' + '<button type="button" class="btn btn-primary">' + questions[i].choices[3] + '</button>' + '</div>');
-        i = i + 1;
-        console.log(i);
-}}
+//Timer
+function setTime() {
+        const timerInterval = setInterval(function () {
+                secondsLeft--;
+                $("#timerHolder").text("Time left: " + secondsLeft);
 
-function endOfGame() {
-        console.log("The end");
+                if (secondsLeft === 0) {
+                        clearInterval(timerInterval);
+                        endGame();
+                }
+        }, 1000);
 }
 
-        // function runQuiz() {
-        //         //This loop creates the questions in the quiz 
-        //         for(i=0;i<questions.length;i++) {
-        //                 $("#quiz").append("<h2>" + questions[i].title + "</h2>");
-        //         $("#quiz").append('<div id="a">' + '<button type="button" class="btn btn-primary">' + questions[i].choices[0] + '</button>' + '</div>');
-        //         $("#quiz").append('<div id="b">' + '<button type="button" class="btn btn-primary">' + questions[i].choices[1] + '</button>' + '</div>');
-        //         $("#quiz").append('<div id="c">' + '<button type="button" class="btn btn-primary">' + questions[i].choices[2] + '</button>' + '</div>');
-        //         $("#quiz").append('<div id="d">' + '<button type="button" class="btn btn-primary">' + questions[i].choices[3] + '</button>' + '</div>');
-                
-        //         if ($("#a").click() && questions[i].answer === questions[i].choices[0]) {
-        //                 console.log("A is correct!");
-        //         } else if ($("#b").click() && questions[i].answer === questions[i].choices[1]) {
-        //                 console.log("B is correct!");
-        //         } else if ($("#c").click() && questions[i].answer === questions[i].choices[2]) {
-        //                 console.log("C is correct!");
-        //         } else if ($("#d").click() && questions[i].answer === questions[i].choices[3]) {
-        //                 console.log("D is correct!");
-        //         }
+// Displays the question[at index counter] of the quiz
+function showQuestion(counter) {
+        $(".question").text(questions[counter].title);
+        $("#0").text(questions[counter].choices[0]);
+        $("#1").text(questions[counter].choices[1]);
+        $("#2").text(questions[counter].choices[2]);
+        $("#3").text(questions[counter].choices[3]);
+};
 
-               
-        //         }
-        // };
-
-        $("#clickToStart").on('click', function () {
-                console.log("hiya");
-                $("#clickToStart").hide("slow");
-                showQuestion();
+//End game Initials input
+function endGame() {
+        $("#quiz").hide();
+        $('#scoreSection').append("<div class='col-sm-2'>" + "</div>");
+        $('#scoreSection').append("<p class='results col-sm-10'>" + "Your score is " + finalScore + "!" + "</p>");
+        $('#scoreSection').append("<div class='row'>" + "</div>");
+        $('#scoreSection').append("<input type='text' id='initialsHere' class='results col-sm-7' placeholder='Put your initials here'>" + "</input>");
+        $('#scoreSection').append("<button type='button' id='submitResults' class='btn btn-success col-sm-3'>" + "Submit" + "</button>");
+        var initials = document.getElementById('#initialsHere').value;
+        $("#submitResults").on('click', function () {
+                localStorage.setItem(initials , finalScore);
+                $('#initialsHere').remove();
+                showHighScores();
         });
+}
+
+//show High Scores
+function showHighScores() {
+        if (localStorage.length === 0) {
+                $('#localStorageScores').append("<div>" + "There are no high scores yet!" + "</div>");
+        } else {
+                $('#localStorageScores').append("<div>" + localStorage + "</div>");
+        }      
+  }
 
 
-
-
-});
-//have question.title show in question class.
-// On google docs I have how to commit to localStorage.setItem("count", count);
-
-{/* This is the structure of each quiz question:  <form>
-            <h1>Quiz Questions</h1>
-            <p class="question"></p>
-            <ul id="quizChoices">
-                <li id="0"></li>
-                <li id="1"></li>
-                <li id="2"></li>
-                <li id="3"></li>
-            </ul>
-        </form> */}
+// Handles the click of an answer choice
+function checkQuestion(number) {
+        if (counter === 9) {
+                endGame();
+        } else if (String(questions[counter].answer) === String(questions[counter].choices[number])) {
+                console.log("answer correct!");
+                counter++;
+                showQuestion(counter);
+        } else {
+                console.log("answer incorrect!");
+                counter++;
+                showQuestion(counter);
+        }
+};

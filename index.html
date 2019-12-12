@@ -16,17 +16,31 @@
 
 <body>
     <div class="row">
-    <div class="col-sm-10" id="highScores"><p><a href="highScores.html" target="_blank">High Scores</a></p></div>
-    <div class="col-sm-2" id="timerHolder"><p>Time: </p><span id="timer"></span</div>
-    </div></div>
+        <div class="col-sm-8" id="highScores"><button type="button" class="btn btn-secondary"
+                onclick="showHighScores()">High Scores</button></div>
+        <div class="col-sm-4" id="timerHolder"></div>
+    </div>
     <div class="row">
         <button id="clickToStart">Click me to start the quiz</button>
     </div>
 
 
     <div class="container" id="quiz">
-        
+        <form class="row">
+            <h1 class="col-sm-12">Quiz Questions</h1>
+            <p class="question col-sm-12"></p>
+            <div id="quizChoices" class="col-sm-12">
+                <button id="0" type="button" class="btn btn-primary" onclick="checkQuestion(zero)"></button>
+                <button id="1" type="button" class="btn btn-primary" onclick="checkQuestion(one)"></button>
+                <button id="2" type="button" class="btn btn-primary" onclick="checkQuestion(two)"></button>
+                <button id="3" type="button" class="btn btn-primary" onclick="checkQuestion(three)"></button>
+            </div>
+        </form>
     </div>
+
+    <div id="scoreSection"></div>
+
+    <div id="localStorageScores"></div>
 
     <script src="script.js"></script>
     <script src="questions.js"></script>

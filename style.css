@@ -2,14 +2,6 @@ button {
     margin-bottom: 10px;
 }
 
-#highScores {
-    float: left;
-}
-
-#timerHolder {
-    float: right;
-}
-
-#clickToStart {
+#clickToStart, #yourScore, #inputInitials, .results {
     margin: auto;
 }
