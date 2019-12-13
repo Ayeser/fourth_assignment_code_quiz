@@ -10,7 +10,6 @@ let secondsLeft = 100;
 
 //This first document ready function is to let the page load and show the button and not the quiz
 $(document).ready(function () {
-
         //Click the start button to show the first question of the quiz and hide high scores
         $("#quiz").hide();
         $("inputInitials").hide();
@@ -60,6 +59,7 @@ function btnSendInitials() {
         localStorage.setItem(initials, finalScore);
         $('#scoreSection').hide();
         showHighScores();
+        counter = 0;
 }
 
 //show High Scores
