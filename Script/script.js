@@ -91,12 +91,10 @@ function checkQuestion(number) {
                 $("#timerHolder").text(" ");
                 endGame();
         } else if (String(questions[counter].answer) === String(questions[counter].choices[number])) {
-                console.log("answer correct!");
                 secondsLeft = secondsLeft + 10;
                 counter++;
                 showQuestion(counter);
         } else {
-                console.log("answer incorrect!");
                 secondsLeft = secondsLeft - 10;
                 counter++;
                 showQuestion(counter);
